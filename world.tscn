@@ -1,5 +1,13 @@
-[gd_scene format=3 uid="uid://dnme3moyp2ris"]
+[gd_scene load_steps=2 format=3 uid="uid://dnme3moyp2ris"]
+
+[ext_resource type="Script" path="res://Label.gd" id="1_sitxw"]
 
 [node name="World" type="Node2D"]
 
-[node name="BG" type="ParallaxLayer" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_top = 46.0
+offset_right = 36.0
+offset_bottom = 69.0
+script = ExtResource("1_sitxw")
