@@ -1,3 +1,5 @@
 [gd_scene format=3 uid="uid://dnme3moyp2ris"]
 
 [node name="World" type="Node2D"]
+
+[node name="BG" type="ParallaxLayer" parent="."]
