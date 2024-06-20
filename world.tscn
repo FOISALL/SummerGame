@@ -7,7 +7,8 @@
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="Label" type="Label" parent="."]
-offset_top = 46.0
-offset_right = 36.0
-offset_bottom = 69.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 39.0
+offset_bottom = 26.0
 script = ExtResource("1_sitxw")
