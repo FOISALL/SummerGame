@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpfrydv5eyg0o"]
+[gd_scene load_steps=3 format=3 uid="uid://dpfrydv5eyg0o"]
 
 [ext_resource type="Script" path="res://demoWorldTitle.gd" id="1_cn4mv"]
+[ext_resource type="PackedScene" uid="uid://bmmyaluljd20n" path="res://Player.tscn" id="2_nyish"]
 
 [node name="DemoWorld" type="Node2D"]
 
@@ -8,3 +9,6 @@
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("1_cn4mv")
+
+[node name="Player" parent="." instance=ExtResource("2_nyish")]
+position = Vector2(66, 132)
