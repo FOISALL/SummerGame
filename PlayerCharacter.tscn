@@ -57,3 +57,11 @@ scale = Vector2(1.96875, 1.96875)
 sprite_frames = SubResource("SpriteFrames_txeyb")
 animation = &"Idle"
 autoplay = "Idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 1)
+zoom = Vector2(1.4, 1.4)
+limit_left = 0
+limit_top = 0
+limit_right = 1200
+limit_bottom = 700
