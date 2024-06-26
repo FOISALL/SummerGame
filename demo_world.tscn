@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpfrydv5eyg0o"]
+[gd_scene load_steps=7 format=3 uid="uid://dpfrydv5eyg0o"]
 
 [ext_resource type="Script" path="res://demoWorldTitle.gd" id="1_cn4mv"]
+[ext_resource type="Script" path="res://demo_world.gd" id="1_pwnxw"]
 [ext_resource type="PackedScene" uid="uid://bmmyaluljd20n" path="res://PlayerCharacter.tscn" id="2_nyish"]
 [ext_resource type="Texture2D" uid="uid://imleegcnsuqf" path="res://assets/tileSets/placeholder tileset.png" id="3_ra4cp"]
 
@@ -48,6 +49,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_pi1ek")
 
 [node name="DemoWorld" type="Node2D"]
+script = ExtResource("1_pwnxw")
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
