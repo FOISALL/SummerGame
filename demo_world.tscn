@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpfrydv5eyg0o"]
+[gd_scene load_steps=9 format=3 uid="uid://dpfrydv5eyg0o"]
 
 [ext_resource type="Script" path="res://demoWorldTitle.gd" id="1_cn4mv"]
 [ext_resource type="Script" path="res://demo_world.gd" id="1_pwnxw"]
 [ext_resource type="PackedScene" uid="uid://bmmyaluljd20n" path="res://PlayerCharacter.tscn" id="2_nyish"]
 [ext_resource type="Texture2D" uid="uid://imleegcnsuqf" path="res://assets/tileSets/placeholder tileset.png" id="3_ra4cp"]
-[ext_resource type="PackedScene" uid="uid://csvswbkedvy4c" path="res://pause_menu.tscn" id="5_4whjy"]
+[ext_resource type="PackedScene" uid="uid://bk8axobrvw2eh" path="res://pause_menu.tscn" id="5_4whjy"]
+[ext_resource type="PackedScene" uid="uid://ckksm7k0r17yn" path="res://ingame_ui.tscn" id="6_3kjkq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pi1ek"]
 texture = ExtResource("3_ra4cp")
@@ -67,3 +68,5 @@ layer_0/tile_data = PackedInt32Array(1245185, 131072, 1, 1310721, 131072, 2, 137
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_4whjy")]
 position = Vector2(-1, 1)
+
+[node name="IngameUI" parent="." instance=ExtResource("6_3kjkq")]
