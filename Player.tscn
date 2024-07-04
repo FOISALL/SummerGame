@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://bmmyaluljd20n"]
+
+[ext_resource type="Texture2D" uid="uid://cmk7r6wrtw3fl" path="res://assets/player_idle_test1.png" id="1_1dr7b"]
+[ext_resource type="Script" path="res://Player.gd" id="1_jr42s"]
+[ext_resource type="PackedScene" uid="uid://bm6hakmsclc8g" path="res://health_component.tscn" id="3_jcnhq"]
+[ext_resource type="PackedScene" uid="uid://uebeuinscr40" path="res://hitbox_component.tscn" id="4_bsu6p"]
+[ext_resource type="PackedScene" uid="uid://nbi8hef0gp5t" path="res://mana_component.tscn" id="5_1lk5f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r4xwx"]
+radius = 13.0
+height = 46.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xm8k"]
+atlas = ExtResource("1_1dr7b")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pay3c"]
+atlas = ExtResource("1_1dr7b")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttiel"]
+atlas = ExtResource("1_1dr7b")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3h73"]
+atlas = ExtResource("1_1dr7b")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_txeyb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xm8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pay3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttiel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3h73")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 10.0
+}]
+
+[node name="PlayerCharacter" type="CharacterBody2D"]
+position = Vector2(1, -1)
+script = ExtResource("1_jr42s")
+
+[node name="ManaComponent" parent="." instance=ExtResource("5_1lk5f")]
+regen = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 6.5)
+shape = SubResource("CapsuleShape2D_r4xwx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.5, 3.5)
+scale = Vector2(1.96875, 1.96875)
+sprite_frames = SubResource("SpriteFrames_txeyb")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 1)
+zoom = Vector2(1.4, 1.4)
+limit_left = 0
+limit_top = 0
+limit_right = 1200
+limit_bottom = 700
+
+[node name="HitboxComponent" parent="." instance=ExtResource("4_bsu6p")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HitboxComponent"]
+polygon = PackedVector2Array(7, -26, 10, -23, 13, 0, 16, 4, 11, 9, 16, 30, 1, 34, -13, 26, -15, 5, -5, -9, -7, -23)
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_jcnhq")]
+
+[connection signal="manaChanged" from="ManaComponent" to="." method="_on_mana_component_mana_changed"]

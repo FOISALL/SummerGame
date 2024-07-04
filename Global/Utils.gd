@@ -1,13 +1,14 @@
 extends Node
 
 const SAVE_PATH = "res://savegame.bin"
-# Called when the node enters the scene tree for the first time.
+
 func saveGame():
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	var data: Dictionary = {
 		"mana": PlayerInfo.mana,
 		"health": PlayerInfo.health
 	}
+	print("saved mana: " + str(PlayerInfo.mana) + "and health "+  str(PlayerInfo.health))
 	var jstr = JSON.stringify(data)
 	file.store_line(jstr)
 

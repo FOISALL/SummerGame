@@ -28,7 +28,7 @@ offset_right = 721.0
 offset_bottom = 283.0
 text = "Continue"
 
-[node name="Quit to Manu" type="Button" parent="Camera2D/CanvasLayer"]
+[node name="Quit to Menu" type="Button" parent="Camera2D/CanvasLayer"]
 top_level = true
 offset_left = 424.0
 offset_top = 341.0
@@ -37,4 +37,4 @@ offset_bottom = 456.0
 text = "Quit"
 
 [connection signal="pressed" from="Camera2D/CanvasLayer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="Camera2D/CanvasLayer/Quit to Manu" to="." method="_on_quit_to_manu_pressed"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/Quit to Menu" to="." method="_on_quit_to_menu_pressed"]

@@ -1,23 +1,36 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+
+
 const JUMP_VELOCITY = -400.0
+
+# Base Stats, may be moved into individual classes later
+const SPEED = 300.0
+const BASE_HEALTH = 100
+const BASE_MANA_REGEN = 5
+var manaPool: ManaComponent 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _ready():
+	PlayerInfo.player = self
+	manaPool = get_node("ManaComponent")
+	manaPool.mana = PlayerInfo.mana
 
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
+	# MOVEMENT
+
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-		PlayerInfo.mana += 1
-		print(PlayerInfo.mana)
+		manaPool.spend(50)
+		print(manaPool.mana)
 		
 
 	# Get the input direction and handle the movement/deceleration.
@@ -27,5 +40,19 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+		
 	move_and_slide()
+		
+func regen():
+	manaPool.restore(manaPool.regen)
+	
+func getHealth():
+	pass
+
+func getMana():
+	return manaPool.mana
+
+# Sends signal from mana component globally, 
+# needed since not every creatures mana component need to be sent globally
+func _on_mana_component_mana_changed(newMana):
+	Signals.emit_signal("playerManaChanged", newMana)
