@@ -34,4 +34,4 @@ func isEmpty():
 	
 
 func _on_regen_timer_timeout():
-	restore(regen * $RegenTimer.wait_time)
+	restore(regen * $MRegenTimer.wait_time)
