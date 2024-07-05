@@ -36,7 +36,10 @@ func showAll():
 	get_node("Camera2D/CanvasLayer").show()
 
 
-func _on_quit_to_manu_pressed():
-	Utils.saveGame()
+
+func _on_quit_to_menu_pressed():
 	unpause()
-	get_tree().change_scene_to_file("res://MainMenu.tscn")
+	PlayerInfo.updatePlayer()
+	
+	Utils.saveGame()
+	await get_tree().change_scene_to_file("res://MainMenu.tscn")
