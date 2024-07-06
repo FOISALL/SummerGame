@@ -79,9 +79,9 @@ autoplay = "Idle"
 [node name="HealthComponent" type="Node2D" parent="."]
 script = ExtResource("3_l8oyy")
 
-[node name="HitboxComponent" type="Area2D" parent="."]
+[node name="HurtboxComponent" type="Area2D" parent="."]
 script = ExtResource("4_8cjks")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_5mkrc")
