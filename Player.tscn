@@ -46,7 +46,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PlayerCharacter" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(1, -1)
 script = ExtResource("1_jr42s")
 

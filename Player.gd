@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 
 
-
 const JUMP_VELOCITY = -400.0
 
 # Base Stats, may be moved into individual classes later
@@ -17,7 +16,11 @@ var healthPool: HealthComponent
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
+	# assign reference to gglobal scripts
 	PlayerInfo.player = self
+	InteractionManager.player = self
+	
+	
 	manaPool = get_node("ManaComponent")
 	manaPool.mana = PlayerInfo.mana
 	manaPool.regen = BASE_MANA_REGEN

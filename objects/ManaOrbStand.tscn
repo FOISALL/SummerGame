@@ -1,54 +1,30 @@
 [gd_scene load_steps=10 format=3 uid="uid://cm4gaksp7acii"]
 
-[ext_resource type="Script" path="res://Scripts/components/hurtboxComp.gd" id="1_3w506"]
 [ext_resource type="Script" path="res://objects/ManaOrbStand.gd" id="1_aan64"]
-[ext_resource type="Script" path="res://Scripts/components/HealthComp.gd" id="2_h5ivc"]
-[ext_resource type="Script" path="res://Components/interaction_area_component.gd" id="3_4m5g7"]
 [ext_resource type="Texture2D" uid="uid://bfovxvvtik81b" path="res://assets/entities/mana orb object ver2-1.png.png" id="4_m53a0"]
+[ext_resource type="PackedScene" uid="uid://ddgbtlptcxsdh" path="res://Components/InteractionAreaComponent.tscn" id="4_stapy"]
 [ext_resource type="Texture2D" uid="uid://clqkjr2a1prry" path="res://assets/entities/mana orb object ver2-2.png.png" id="5_nqbpo"]
+[ext_resource type="PackedScene" uid="uid://uebeuinscr40" path="res://Components/hurtbox_component.tscn" id="5_penon"]
+[ext_resource type="PackedScene" uid="uid://bm6hakmsclc8g" path="res://Components/health_component.tscn" id="6_p0841"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3efr6"]
 radius = 12.0
 height = 40.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kku2"]
-size = Vector2(23, 37.25)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jf413"]
 radius = 21.0
 height = 104.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kku2"]
+size = Vector2(23, 37.25)
 
 [node name="ManaOrbStand" type="RigidBody2D"]
 disable_mode = 1
 script = ExtResource("1_aan64")
 
-[node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("2_h5ivc")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_3efr6")
-
-[node name="HurtboxComponent" type="Area2D" parent="."]
-position = Vector2(-1, -1)
-script = ExtResource("1_3w506")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(1, 2)
-shape = SubResource("RectangleShape2D_0kku2")
-metadata/_edit_lock_ = true
-
-[node name="InteractionAreaComponent" type="Area2D" parent="."]
-position = Vector2(0, -1)
-script = ExtResource("3_4m5g7")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionAreaComponent"]
-position = Vector2(0, -1)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_jf413")
-metadata/_edit_lock_ = true
 
 [node name="SpriteActive" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
@@ -63,5 +39,25 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_nqbpo")
 metadata/_edit_lock_ = true
 
-[connection signal="area_entered" from="InteractionAreaComponent" to="." method="_on_interaction_area_component_area_entered"]
-[connection signal="area_exited" from="InteractionAreaComponent" to="." method="_on_interaction_area_component_area_exited"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 25.0
+one_shot = true
+
+[node name="InteractionAreaComponent" parent="." instance=ExtResource("4_stapy")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionAreaComponent"]
+position = Vector2(0, -2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jf413")
+metadata/_edit_lock_ = true
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("5_penon")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_0kku2")
+metadata/_edit_lock_ = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_p0841")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
