@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Fox.gd" id="1_4qn6q"]
 [ext_resource type="Texture2D" uid="uid://06ycq5stviju" path="res://assets/entities/fox creature.png" id="2_pugji"]
-[ext_resource type="PackedScene" uid="uid://ddgbtlptcxsdh" path="res://Components/InteractionAreaComponent.tscn" id="3_4kbty"]
+[ext_resource type="PackedScene" uid="uid://uebeuinscr40" path="res://Components/hurtbox_component.tscn" id="4_fiusm"]
 [ext_resource type="PackedScene" uid="uid://bm6hakmsclc8g" path="res://Components/health_component.tscn" id="4_vs4b7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ecqa"]
@@ -76,10 +76,10 @@ sprite_frames = SubResource("SpriteFrames_cxbm2")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="InteractionAreaComponent" parent="." instance=ExtResource("3_4kbty")]
+[node name="HealthComponent" parent="." instance=ExtResource("4_vs4b7")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionAreaComponent"]
+[node name="HurtboxComponent" parent="." instance=ExtResource("4_fiusm")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_5mkrc")
-
-[node name="HealthComponent" parent="." instance=ExtResource("4_vs4b7")]
