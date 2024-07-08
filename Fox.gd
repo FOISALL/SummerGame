@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
-
+# base stats, may be moved later, I dont know
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const BASE_HEALTH = 60
 const BASE_REGEN = 0.3
 
+# attached components
 var healthPool: HealthComponent
 
 
@@ -13,6 +14,8 @@ var healthPool: HealthComponent
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
+	
+	# instantiate component
 	healthPool = $HealthComponent
 	healthPool.MAX_HEALTH = BASE_HEALTH
 	healthPool.regen = BASE_REGEN

@@ -9,6 +9,8 @@ func _physics_process(delta):
 		#get_tree().paused = true
 
 func _input(event):
+	
+	# Handle pause menu
 	if event.is_action_pressed("escape"):
 		get_node("PauseMenu").showAll()
 		get_tree().paused = true

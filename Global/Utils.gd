@@ -2,6 +2,8 @@ extends Node
 
 const SAVE_PATH = "res://savegame.bin"
 
+# Saving and loading is done by writing and reading from a file using using the data stored in Player info
+
 func saveGame():
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	var data: Dictionary = {
@@ -26,6 +28,7 @@ func loadGame():
 				PlayerInfo.health = current_line["health"]
 				print(PlayerInfo.mana)
 				print(PlayerInfo.health)
+				print("save Loaded")
 				
 
 

@@ -9,6 +9,8 @@ const SPEED = 300.0
 const BASE_HEALTH = 100
 const BASE_MANA_REGEN = 5
 const BASE_HEALTH_REGEN = 8
+
+# Components
 var manaPool: ManaComponent 
 var healthPool: HealthComponent
 
@@ -16,11 +18,12 @@ var healthPool: HealthComponent
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
-	# assign reference to gglobal scripts
+	
+	# assign reference to global scripts
 	PlayerInfo.player = self
 	InteractionManager.player = self
 	
-	
+	# assign components and base values
 	manaPool = get_node("ManaComponent")
 	manaPool.mana = PlayerInfo.mana
 	manaPool.regen = BASE_MANA_REGEN
@@ -65,10 +68,11 @@ func getMana():
 
 # Sends signal from mana component globally, 
 # needed since not every creatures mana component need to be sent globally
+# This signal is the picked up by the UI
 func _on_mana_component_mana_changed(newMana):
 	Signals.emit_signal("playerManaChanged", newMana)
 
-
+# Sends signal from health component globally
 func _on_health_component_health_changed(newHealth):
 	Signals.emit_signal("playerHealthChanged", newHealth)
 	

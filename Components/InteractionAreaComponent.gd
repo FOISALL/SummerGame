@@ -20,6 +20,7 @@ func _ready():
 func _process(delta):
 	pass
 
+# if a player enters this will register itself to the global interaction manager
 func _on_body_entered(body):
 	interlocutor = body
 	if body.name == "Player":
