@@ -29,6 +29,8 @@ func _onInteract():
 		$SpriteActive.hide()
 		$SpriteInactive.show()
 		$Timer.start()
+		
+		$InteractionAreaComponent/CollisionShape2D.disabled = true
 	
 	
 # Timer to reactivate object after some time
@@ -39,10 +41,8 @@ func _on_timer_timeout():
 	$SpriteActive.show()
 	$SpriteInactive.hide()
 	
-	# If player is still standing in area this will reregister them
-	if ($InteractionAreaComponent.interlocutor != null &&
-	$InteractionAreaComponent.interlocutor.name == "Player"):
-		$InteractionAreaComponent._on_body_entered($InteractionAreaComponent.interlocutor)
+	$InteractionAreaComponent/CollisionShape2D.disabled = false
+
 
 	
 

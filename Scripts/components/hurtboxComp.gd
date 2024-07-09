@@ -1,10 +1,12 @@
 extends Area2D
-class_name HitboxComponent
+class_name HurtboxComponent
 
 @export var healthComp : HealthComponent
 
 func damage(attack: Attack):
+	print("attacked")
 	if healthComp:
+		print("taking damage")
 		healthComp.damage(attack)
 
 # Called when the node enters the scene tree for the first time.

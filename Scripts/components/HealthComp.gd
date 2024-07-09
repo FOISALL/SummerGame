@@ -3,9 +3,10 @@ class_name HealthComponent
 
 signal healthChanged(health)
 
-@export var MAX_HEALTH : float
+var MAX_HEALTH : float
 var health : float
-@export var regen : float
+var regen : float
+var full : bool 
 
 func _ready():
 	health = MAX_HEALTH 
@@ -14,13 +15,14 @@ func _ready():
 
 func damage(attack: Attack):
 	
-	health -= attack.attackDamage
+	lose(attack.attackDamage)
 	var parent = get_parent()
 	
 	parent.velocity = (global_position - attack.attackPos).normalized()*attack.knockback
 	
 	if health <= 0:
-		parent.queue_free()
+		parent.queue_free() 
+		# here it might be good to insteade have a callable variable as a function that can be overridden by parent
 	
 func lose(amount: float):
 	_setHealth(max(0,health - amount))
@@ -31,8 +33,15 @@ func restore(amount: float):
 	
 # main method for changing mana, not meant to be called from outside, emits signal for parent
 func _setHealth(newHealth):
+	var prevHealth = health
+
+	if isFull() && newHealth < prevHealth:
+
+		$HRegenTimer.start()
+	elif !isFull() && newHealth == MAX_HEALTH: 
+		$HRegenTimer.stop()
 	health = newHealth
-	emit_signal("healthChanged",health)
+	emit_signal("healthChanged",prevHealth,health)
 	
 func isFull():
 	return MAX_HEALTH == health

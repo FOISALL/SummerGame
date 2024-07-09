@@ -6,9 +6,12 @@ const JUMP_VELOCITY = -400.0
 
 # Base Stats, may be moved into individual classes later
 const SPEED = 300.0
-const BASE_HEALTH = 100
+const BASE_HEALTH = 200
 const BASE_MANA_REGEN = 5
 const BASE_HEALTH_REGEN = 8
+const BASE_DAMAGE = 15
+
+var isAttacking = false
 
 # Components
 var manaPool: ManaComponent 
@@ -17,7 +20,13 @@ var healthPool: HealthComponent
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+@onready var anim = $AnimatedSprite2D/AnimationPlayer
+
 func _ready():
+	
+	# I wanted to set this variable in the UI but that causes a bug for some reason so I do it manualy isntead
+	$meleeAttack/CollisionShape2D.disabled = true
+	
 	
 	# assign reference to global scripts
 	PlayerInfo.player = self
@@ -28,10 +37,16 @@ func _ready():
 	manaPool.mana = PlayerInfo.mana
 	manaPool.regen = BASE_MANA_REGEN
 	healthPool = $HealthComponent
+	healthPool.MAX_HEALTH = BASE_HEALTH
 	healthPool.health = PlayerInfo.health
 	healthPool.regen = BASE_HEALTH_REGEN
 
 func _physics_process(delta):
+	
+	if(!isAttacking):
+		anim.play("Idle")
+	
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -65,6 +80,13 @@ func getHealth():
 
 func getMana():
 	return manaPool.mana
+	
+# this will prob be moved elsewhere later
+func _input(event):
+	if event.is_action_pressed("attack"):
+		anim.play("meleeAttack")
+		isAttacking = true
+		anim.speed_scale = 3
 
 # Sends signal from mana component globally, 
 # needed since not every creatures mana component need to be sent globally
@@ -73,6 +95,26 @@ func _on_mana_component_mana_changed(newMana):
 	Signals.emit_signal("playerManaChanged", newMana)
 
 # Sends signal from health component globally
-func _on_health_component_health_changed(newHealth):
+func _on_health_component_health_changed(prevHealth, newHealth):
 	Signals.emit_signal("playerHealthChanged", newHealth)
 	
+
+	
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "meleeAttack":
+		isAttacking = false
+		anim.speed_scale = 1
+
+
+func _on_melee_attack_area_entered(area):
+	print("ATTACK!!")
+	if area is HurtboxComponent:
+		var hurtbox : HurtboxComponent = area
+		
+		var attack  = Attack.new()
+		attack.attackDamage = BASE_DAMAGE
+		attack.attackPos = global_position
+		
+		hurtbox.damage(attack)
