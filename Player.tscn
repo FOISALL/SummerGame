@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://ef8ryjwfsfuh"]
+[gd_scene load_steps=22 format=3 uid="uid://ef8ryjwfsfuh"]
 
 [ext_resource type="Texture2D" uid="uid://cmk7r6wrtw3fl" path="res://assets/player_idle_test1.png" id="1_1dr7b"]
 [ext_resource type="Script" path="res://Player.gd" id="1_jr42s"]
 [ext_resource type="PackedScene" uid="uid://nbi8hef0gp5t" path="res://Components/mana_component.tscn" id="2_d0gqg"]
 [ext_resource type="PackedScene" uid="uid://uebeuinscr40" path="res://Components/hurtbox_component.tscn" id="4_4f30s"]
+[ext_resource type="Texture2D" uid="uid://8iqgkvx304ok" path="res://assets/entities/player_kick_off_death.png" id="4_stue6"]
 [ext_resource type="PackedScene" uid="uid://bm6hakmsclc8g" path="res://Components/health_component.tscn" id="5_6rbyp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r4xwx"]
@@ -26,6 +27,22 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("1_1dr7b")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqt23"]
+atlas = ExtResource("4_stue6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxcq8"]
+atlas = ExtResource("4_stue6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_087l7"]
+atlas = ExtResource("4_stue6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6xaw"]
+atlas = ExtResource("4_stue6")
+region = Rect2(96, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_txeyb"]
 animations = [{
 "frames": [{
@@ -44,9 +61,131 @@ animations = [{
 "loop": true,
 "name": &"Idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqt23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxcq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_087l7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6xaw")
+}],
+"loop": true,
+"name": &"meleeAttack",
+"speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[sub_resource type="Animation" id="Animation_idw2i"]
+resource_name = "meleeAttack"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"meleeAttack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("meleeAttack/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_vxx0m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("meleeAttack/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_83kae"]
+resource_name = "Idle"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m8e5k"]
+_data = {
+"Idle": SubResource("Animation_83kae"),
+"RESET": SubResource("Animation_vxx0m"),
+"meleeAttack": SubResource("Animation_idw2i")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sq2nw"]
+size = Vector2(24, 38)
+
+[node name="Player" type="CharacterBody2D"]
 position = Vector2(1, -1)
 script = ExtResource("1_jr42s")
 
@@ -61,8 +200,14 @@ shape = SubResource("CapsuleShape2D_r4xwx")
 position = Vector2(-0.5, 3.5)
 scale = Vector2(1.96875, 1.96875)
 sprite_frames = SubResource("SpriteFrames_txeyb")
-animation = &"Idle"
-autoplay = "Idle"
+animation = &"meleeAttack"
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_m8e5k")
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, 1)
@@ -79,5 +224,14 @@ polygon = PackedVector2Array(7, -26, 10, -23, 13, 0, 16, 4, 11, 9, 16, 30, 1, 34
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_6rbyp")]
 
+[node name="meleeAttack" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="meleeAttack"]
+position = Vector2(31, 14)
+shape = SubResource("RectangleShape2D_sq2nw")
+
 [connection signal="manaChanged" from="ManaComponent" to="." method="_on_mana_component_mana_changed"]
+[connection signal="animation_finished" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]
+[connection signal="area_entered" from="meleeAttack" to="." method="_on_melee_attack_area_entered"]

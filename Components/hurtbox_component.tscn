@@ -3,4 +3,6 @@
 [ext_resource type="Script" path="res://Scripts/components/hurtboxComp.gd" id="1_7ehoc"]
 
 [node name="HurtboxComponent" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_7ehoc")
