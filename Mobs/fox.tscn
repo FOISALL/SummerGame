@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Fox.gd" id="1_4qn6q"]
 [ext_resource type="Texture2D" uid="uid://06ycq5stviju" path="res://assets/entities/fox creature.png" id="2_pugji"]
+[ext_resource type="PackedScene" uid="uid://bm6hakmsclc8g" path="res://Components/health_component.tscn" id="3_xnrgv"]
 [ext_resource type="PackedScene" uid="uid://uebeuinscr40" path="res://Components/hurtbox_component.tscn" id="4_fiusm"]
-[ext_resource type="PackedScene" uid="uid://bm6hakmsclc8g" path="res://Components/health_component.tscn" id="4_vs4b7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ecqa"]
 radius = 7.0
@@ -79,7 +79,7 @@ sprite_frames = SubResource("SpriteFrames_cxbm2")
 animation = &"Idle"
 autoplay = "Idle"
 
-[node name="HealthComponent" parent="." instance=ExtResource("4_vs4b7")]
+[node name="HealthComponent" parent="." instance=ExtResource("3_xnrgv")]
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComp") instance=ExtResource("4_fiusm")]
 healthComp = NodePath("../HealthComponent")

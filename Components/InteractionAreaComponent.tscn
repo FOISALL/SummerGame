@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://ddgbtlptcxsdh"]
 
-[ext_resource type="Script" path="res://Components/InteractionAreaComponent.gd" id="1_x63dd"]
+[ext_resource type="Script" path="res://Scripts/components/InteractionAreaComponent.gd" id="1_rxrfb"]
 
 [node name="InteractionAreaComponent" type="Area2D"]
-script = ExtResource("1_x63dd")
+script = ExtResource("1_rxrfb")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
