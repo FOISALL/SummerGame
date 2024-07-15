@@ -13,7 +13,7 @@ func _ready(): # I will have to evaluate how to initialise it correctly from ini
 	#anim = $AnimatedSprite2D/AnimationPlayer
 	id = "flameBlast"
 	maxLvl = 4
-	manaCost = 100
+	manaCost = 40
 	lvl = 1 # should be instantiated from the spell user
 
 

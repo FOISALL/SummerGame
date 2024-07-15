@@ -232,7 +232,8 @@ collision_mask = 2
 position = Vector2(31, 14)
 shape = SubResource("RectangleShape2D_sq2nw")
 
-[node name="SpellcastingComponent" parent="." instance=ExtResource("7_e4f8h")]
+[node name="SpellcastingComponent" parent="." node_paths=PackedStringArray("manaComp") instance=ExtResource("7_e4f8h")]
+manaComp = NodePath("../ManaComponent")
 
 [connection signal="manaChanged" from="ManaComponent" to="." method="_on_mana_component_mana_changed"]
 [connection signal="animation_finished" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

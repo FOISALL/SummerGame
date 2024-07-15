@@ -2,6 +2,7 @@ extends Node2D
 
 class_name SpellcastingComponent
 
+@export var manaComp : ManaComponent
 
 var learnedSpells: Array[Spell] = []
 var preparedSpells: Array[Spell] = []
@@ -19,16 +20,21 @@ func castSpell():
 	if !preparedSpells.is_empty():
 		print("spell Casts!!")
 		var spell: Spell = preparedSpells[0]
-		$"..".add_child(spell)
-		activeSpells.append(spell)
-		spell.cast()
+		if spell.manaCost <= manaComp.mana:
+			add_child(spell)
+			manaComp.spend(spell.manaCost)
+			print("spending " + str(spell.manaCost) + " mana")
+			activeSpells.append(spell)
+			spell.cast()
+		else:
+			print("not enough mana")
 		
 func _on_spellOver(spell: Spell):
 	var index = activeSpells.find(spell)
 	
 	if index != -1:
 		activeSpells.remove_at(index)
-		$"..".remove_child(spell)
+		remove_child(spell)
 	
 
 

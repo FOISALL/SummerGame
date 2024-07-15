@@ -2,6 +2,7 @@ extends Node2D
 
 class_name Spell # this is meant to act as an abstract class
 
+var spellCastingComp : SpellcastingComponent
 var id: String
 
 var source: String # will be set to casting unit
