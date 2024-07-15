@@ -49,6 +49,7 @@ func isFull():
 func isEmpty():
 	return health == 0
 
-
+# there might be a point in having a single global timer for regen if there are many enemies,
+# just a thought for later
 func _on_h_regen_timer_timeout():
 	restore(regen * $HRegenTimer.wait_time)

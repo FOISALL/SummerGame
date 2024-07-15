@@ -16,12 +16,13 @@ var isAttacking = false
 # Components
 var manaPool: ManaComponent 
 var healthPool: HealthComponent
+var spells: SpellcastingComponent
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var anim = $AnimatedSprite2D/AnimationPlayer
-
+@onready var anim2 = $AnimatedSprite2D2/AnimationPlayer
 func _ready():
 	
 	# I wanted to set this variable in the UI but that causes a bug for some reason so I do it manualy isntead
@@ -36,10 +37,24 @@ func _ready():
 	manaPool = get_node("ManaComponent")
 	manaPool.mana = PlayerInfo.mana
 	manaPool.regen = BASE_MANA_REGEN
+	
 	healthPool = $HealthComponent
 	healthPool.MAX_HEALTH = BASE_HEALTH
 	healthPool.health = PlayerInfo.health
 	healthPool.regen = BASE_HEALTH_REGEN
+	
+	spells = $SpellcastingComponent
+	# load spells
+	var spellName = "flameBlast"
+	var spellPath = load("res://Spells/" +spellName + "/" + spellName +".tscn")
+	var flameBlast = spellPath.instantiate()
+	#flameBlast.position = global_position
+	
+	print("blast pos" + str(flameBlast.position))
+
+	spells.learnedSpells.append(flameBlast)
+	spells.preparedSpells.append(flameBlast)
+	
 
 func _physics_process(delta):
 	
@@ -87,6 +102,11 @@ func _input(event):
 		anim.play("meleeAttack")
 		isAttacking = true
 		anim.speed_scale = 3
+		
+	if event.is_action_pressed("castspell"):
+		print("gonna cast spell")
+		spells.castSpell()
+		#anim2.play("blast")
 
 # Sends signal from mana component globally, 
 # needed since not every creatures mana component need to be sent globally

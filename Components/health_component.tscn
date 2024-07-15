@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bm6hakmsclc8g"]
 
-[ext_resource type="Script" path="res://Scripts/components/HealthComp.gd" id="1_by2s6"]
+[ext_resource type="Script" path="res://Scripts/components/HealthComp.gd" id="1_2kvru"]
 
 [node name="HealthComponent" type="Node2D"]
-script = ExtResource("1_by2s6")
+script = ExtResource("1_2kvru")
 
 [node name="HRegenTimer" type="Timer" parent="."]
 wait_time = 2.0
