@@ -14,7 +14,7 @@ const BASE_DAMAGE = 15
 var isAttacking = false
 
 # Components
-var manaPool: ManaComponent 
+var manaPool: ManaComponent
 var healthPool: HealthComponent
 var spells: SpellcastingComponent
 
@@ -26,7 +26,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	
 	# I wanted to set this variable in the UI but that causes a bug for some reason so I do it manualy isntead
-	$meleeAttack/CollisionShape2D.disabled = true
+	$AnimatedSprite2D/meleeAttack/CollisionShape2D.disabled = true
 	
 	
 	# assign reference to global scripts
@@ -44,17 +44,24 @@ func _ready():
 	healthPool.regen = BASE_HEALTH_REGEN
 	
 	spells = $SpellcastingComponent
-	# load spells
+	# load spells TEMPORARY DEBUGGING CODE! ###################
 	var spellName = "flameBlast"
-	var spellPath = load("res://Spells/" +spellName + "/" + spellName +".tscn")
-	var flameBlast = spellPath.instantiate()
+	var flameBlast = Spell.new_Spell(spellName,self, 1)
 	#flameBlast.position = global_position
+	spellName = "fireBall"
+	var spellPath = load("res://Spells/" +spellName + "/" + spellName +".tscn")
+	var fireBall = Spell.new_Spell(spellName,self, 1)
 	
 	print("blast pos" + str(flameBlast.position))
-
+	
+	
 	spells.learnedSpells.append(flameBlast)
 	spells.preparedSpells.append(flameBlast)
 	
+	spells.learnedSpells.append(fireBall)
+	spells.preparedSpells.append(fireBall)
+	
+
 
 func _physics_process(delta):
 	
@@ -78,6 +85,16 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left", "right")
+	
+	# Link to reddit post that told me how to flip properly. This was not what I ecpected
+	# https://www.reddit.com/r/godot/comments/1ddalbo/how_to_properly_flip_characters/
+	if direction == -1:
+		scale = Vector2(1, -1)
+		rotation = PI
+	elif direction == 1:
+		scale = Vector2(1, 1)
+		rotation = 0
+	
 	if direction:
 		velocity.x = direction * SPEED
 	else:

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bk7davti58l8t"
-path="res://.godot/imported/flameBlast.png-0645f3e17be2d96d8734c6af241b9e00.ctex"
+path="res://.godot/imported/flameBlast.png-fa4bd80b9235f9d35ba53aea31b40f96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Spells/flameBlast.png"
-dest_files=["res://.godot/imported/flameBlast.png-0645f3e17be2d96d8734c6af241b9e00.ctex"]
+source_file="res://assets/Spells/flameBlast/flameBlast.png"
+dest_files=["res://.godot/imported/flameBlast.png-fa4bd80b9235f9d35ba53aea31b40f96.ctex"]
 
 [params]
 

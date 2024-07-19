@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cmxi2spnktot2"]
 
-[ext_resource type="Script" path="res://SpellcastingComponent.gd" id="1_8ckcs"]
+[ext_resource type="Script" path="res://Scripts/components/SpellcastingComponent.gd" id="1_gmpvc"]
 
 [node name="SpellcastingComponent" type="Node2D"]
-script = ExtResource("1_8ckcs")
+script = ExtResource("1_gmpvc")
