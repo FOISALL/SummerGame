@@ -188,7 +188,6 @@ size = Vector2(24, 38)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(1, -1)
-collision_layer = 2
 script = ExtResource("1_jr42s")
 
 [node name="ManaComponent" parent="." instance=ExtResource("2_d0gqg")]
