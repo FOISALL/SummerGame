@@ -1,7 +1,7 @@
 extends Node2D
 class_name ManaComponent
 
-signal manaChanged(newMana) 
+signal manaChanged(newMana)
 
 @export var MAX_MANA := 1000
 @export var mana : float
@@ -9,8 +9,6 @@ signal manaChanged(newMana)
 
 func _ready():
 	mana = MAX_MANA 
-	
-
 
 # for casting spells
 func spend(cost: float):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dp801kia32rmo"]
 
 [ext_resource type="Script" path="res://Spells/flameBlast/flameBlast.gd" id="1_vvyv1"]
-[ext_resource type="Texture2D" uid="uid://bk7davti58l8t" path="res://assets/Spells/flameBlast.png" id="2_quhu4"]
+[ext_resource type="Texture2D" uid="uid://bk7davti58l8t" path="res://assets/Spells/flameBlast/flameBlast.png" id="2_quhu4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4tgc4"]
 atlas = ExtResource("2_quhu4")
@@ -151,3 +151,4 @@ shape = SubResource("CircleShape2D_c4208")
 metadata/_edit_lock_ = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
