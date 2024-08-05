@@ -46,20 +46,25 @@ func _ready():
 	spells = $SpellcastingComponent
 	# load spells TEMPORARY DEBUGGING CODE! ###################
 	var spellName = "flameBlast"
-	var flameBlast = Spell.new_Spell(spellName,self, 1)
+	var flameBlast = Spell.new_Spell(spellName,self,self, 1)
 	#flameBlast.position = global_position
 	spellName = "fireBall"
 	var spellPath = load("res://Spells/" +spellName + "/" + spellName +".tscn")
-	var fireBall = Spell.new_Spell(spellName,self, 1)
+	var fireBall = Spell.new_Spell(spellName,self,self, 1)
 	
 	print("blast pos" + str(flameBlast.position))
 	
+	spells.learnedSpells.append(fireBall)
+	spells.preparedSpells.append(fireBall)
 	
 	spells.learnedSpells.append(flameBlast)
 	spells.preparedSpells.append(flameBlast)
 	
-	spells.learnedSpells.append(fireBall)
-	spells.preparedSpells.append(fireBall)
+
+	
+
+	
+
 	
 
 

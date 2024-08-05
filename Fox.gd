@@ -3,7 +3,7 @@ extends CharacterBody2D
 # base stats, may be moved later, I dont know
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-const BASE_HEALTH = 60
+const BASE_HEALTH = 500
 const BASE_REGEN = 0.3
 
 # attached components

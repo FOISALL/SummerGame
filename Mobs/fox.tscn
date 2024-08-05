@@ -85,6 +85,7 @@ autoplay = "Idle"
 healthComp = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+light_mask = 2
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_5mkrc")
 
