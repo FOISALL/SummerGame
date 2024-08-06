@@ -72,6 +72,7 @@ func cast():
 
 
 func _on_area_entered(area):
+	print(area.get_collision_layer())
 	# this part is not working properly as collisions with non enemy object for some reason are detected
 	print("ATTACK!!")
 	if area is HurtboxComponent:
@@ -86,6 +87,12 @@ func _on_area_entered(area):
 		hurtbox.damage(attack)
 		manaPool.spend(5)
 
+
+func _on_collisionbox_body_entered(body):
+	spells.castSpell()
+	Signals.emit_signal("spellOver",self)
+
+
 func _on_mana_component_mana_changed(newMana):
 	if newMana <= 50:
 		print(newMana)
@@ -93,8 +100,6 @@ func _on_mana_component_mana_changed(newMana):
 		spells.castSpell()
 		print("fireball end")
 		Signals.emit_signal("spellOver",self)
-		
-		
 
 
 # change from charging state to launched state, might change in the future
@@ -102,5 +107,11 @@ func _on_animation_player_animation_changed(old_name, new_name):
 	charging = false
 	velocity = source.velocity.normalized() * 420 
 	manaPool.regen = -10
+
+
+
+
+
+
 
 

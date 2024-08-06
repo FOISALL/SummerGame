@@ -70,7 +70,16 @@ castspell2={
 
 [layer_names]
 
+2d_render/layer_1="player"
 2d_render/layer_2="enemies"
+2d_render/layer_3="objects"
+2d_render/layer_4="spells"
+2d_render/layer_5="ground"
+2d_physics/layer_1="players"
+2d_physics/layer_2="enenmies"
+2d_physics/layer_3="objects"
+2d_physics/layer_4="spells"
+2d_physics/layer_5="ground"
 
 [rendering]
 
