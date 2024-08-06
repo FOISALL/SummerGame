@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://5nkkhpkgh7g1"]
+[gd_scene load_steps=33 format=3 uid="uid://5nkkhpkgh7g1"]
 
 [ext_resource type="Script" path="res://Spells/fireBall/fireBall.gd" id="1_x856t"]
 [ext_resource type="Texture2D" uid="uid://dyhcixbl2o43d" path="res://assets/Spells/fireball/fireballcharge.png" id="2_phlrl"]
@@ -213,7 +213,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../CollisionShape2D:disabled")
+tracks/4/path = NodePath("../DamageShape:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -253,7 +253,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../CollisionShape2D:disabled")
+tracks/2/path = NodePath("../DamageShape:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -268,7 +268,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../CollisionShape2D:disabled")
+tracks/0/path = NodePath("../DamageShape:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -289,9 +289,11 @@ _data = {
 radius = 17.0
 height = 42.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_881da"]
+radius = 12.0
+
 [node name="fireBall" type="Area2D" node_paths=PackedStringArray("anim")]
-collision_layer = 2
-collision_mask = 2
+collision_mask = 18
 script = ExtResource("1_x856t")
 anim = NodePath("AnimatedSprite2D/AnimationPlayer")
 
@@ -305,7 +307,7 @@ libraries = {
 "": SubResource("AnimationLibrary_closn")
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="DamageShape" type="CollisionShape2D" parent="."]
 visibility_layer = 2
 position = Vector2(5, -1)
 rotation = 1.5708
@@ -317,6 +319,18 @@ manaComp = NodePath("../ManaComponent")
 
 [node name="ManaComponent" parent="." instance=ExtResource("5_1adch")]
 
+[node name="collisionbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collisionbox"]
+light_mask = 16
+visibility_layer = 16
+position = Vector2(11, 0)
+shape = SubResource("CircleShape2D_881da")
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_changed" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_changed"]
 [connection signal="manaChanged" from="ManaComponent" to="." method="_on_mana_component_mana_changed"]
+[connection signal="area_entered" from="collisionbox" to="." method="_on_collisionbox_area_entered"]
+[connection signal="body_entered" from="collisionbox" to="." method="_on_collisionbox_body_entered"]
