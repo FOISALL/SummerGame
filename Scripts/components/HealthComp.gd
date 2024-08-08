@@ -20,9 +20,11 @@ func damage(attack: Attack):
 	
 	parent.velocity = (global_position - attack.attackPos).normalized()*attack.knockback
 	
-	if health <= 0:
+	# die of less health than 1, this is to prevent survival on machine error decimal e.g 0.00000001 health
+	if health < 1: 
 		parent.queue_free() 
 		# here it might be good to insteade have a callable variable as a function that can be overridden by parent
+		# or just a die function
 	
 func lose(amount: float):
 	_setHealth(max(0,health - amount))
