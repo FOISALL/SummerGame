@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlp12mmpepftf"]
+
+[ext_resource type="Script" path="res://Effects/burning/Burning.gd" id="1_phuli"]
+
+[node name="Burning" type="Node2D"]
+script = ExtResource("1_phuli")
+
+[node name="DmgTimer" type="Timer" parent="."]
+
+[node name="LifeTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="DmgTimer" to="." method="_on_dmg_timer_timeout"]
