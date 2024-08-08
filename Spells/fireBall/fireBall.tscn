@@ -295,7 +295,7 @@ radius = 12.0
 [node name="fireBall" type="Area2D" node_paths=PackedStringArray("anim")]
 collision_mask = 18
 script = ExtResource("1_x856t")
-anim = NodePath("AnimatedSprite2D/AnimationPlayer")
+anim = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l2fku")
@@ -332,5 +332,4 @@ shape = SubResource("CircleShape2D_881da")
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="animation_changed" from="AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_changed"]
 [connection signal="manaChanged" from="ManaComponent" to="." method="_on_mana_component_mana_changed"]
-[connection signal="area_entered" from="collisionbox" to="." method="_on_collisionbox_area_entered"]
 [connection signal="body_entered" from="collisionbox" to="." method="_on_collisionbox_body_entered"]

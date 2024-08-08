@@ -12,6 +12,7 @@ var charging : bool = true
 
 var manaPool: ManaComponent
 var spells: SpellcastingComponent
+var movement: MovementComponent
 
 
 
@@ -29,6 +30,9 @@ func _ready():
 	manaPool = $ManaComponent
 	manaPool.mana = 2*manaCost
 	manaPool.regen = 0
+	
+	#movement = $MovementComponent
+	#movement.s = self
 	
 	anim = $AnimatedSprite2D/AnimationPlayer
 	
