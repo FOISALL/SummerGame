@@ -74,16 +74,16 @@ func cast():
 	print(str(global_position))
 
 
-
+# Deal damage on contact
 func _on_area_entered(area):
 	print(area.get_collision_layer())
-	# this part is not working properly as collisions with non enemy object for some reason are detected
 	print("ATTACK!!")
 	if area is HurtboxComponent:
 		
 		print("damagetime")
 		var hurtbox : HurtboxComponent = area
 		
+		# create attack
 		var attack  = Attack.new()
 		attack.attackDamage = dmg[lvl]
 		attack.attackPos = global_position
@@ -94,7 +94,7 @@ func _on_area_entered(area):
 
 func _on_collisionbox_body_entered(body):
 	spells.castSpell()
-	Signals.emit_signal("spellOver",self)
+	emit_signal("spellOver",self)
 
 
 func _on_mana_component_mana_changed(newMana):
@@ -103,7 +103,7 @@ func _on_mana_component_mana_changed(newMana):
 		
 		spells.castSpell()
 		print("fireball end")
-		Signals.emit_signal("spellOver",self)
+		emit_signal("spellOver",self)
 
 
 # change from charging state to launched state, might change in the future

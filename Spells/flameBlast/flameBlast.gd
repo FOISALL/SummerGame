@@ -21,14 +21,6 @@ func _ready(): # I will have to evaluate how to initialise it correctly from ini
 	anim = $AnimatedSprite2D/AnimationPlayer
 	burn = StatusEffect.new_effect("burning",self,self, 1)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	if !anim.is_playing():
-#		Signals.emit_signal("spellOver",self)
-		#get_parent().remove_child(self)
-		#self.queue_free()
-
 	
 func cast():
 	anim.play("blast")
@@ -43,6 +35,7 @@ func _on_area_entered(area):
 	if area is HurtboxComponent:
 		var hurtbox : HurtboxComponent = area
 		
+		# attack to sent to targets
 		var attack  = Attack.new()
 		attack.attackDamage = dmg[lvl]
 		attack.attackPos = global_position
@@ -50,17 +43,9 @@ func _on_area_entered(area):
 		
 		hurtbox.damage(attack)
 		
-# constructor
-#static func new_FlameBlast(source: Node2D, lvl : int):
-#	var spellName = "flameBlast"
-#	var spellPath = load("res://Spells/" +spellName + "/" + spellName +".tscn")
-#	var flameBlast = spellPath.instantiate()
-#	flameBlast.source = source
-#	flameBlast.lvl = lvl
-#	return flameBlast
 	
 
-
+# animation plays once, then spell ends
 func _on_animation_player_animation_finished(_anim_name):
 	print("blast done!")
 	# this is needed since the spellcasting component handling it will be destroyed.
@@ -68,4 +53,4 @@ func _on_animation_player_animation_finished(_anim_name):
 	if(caster == null):
 		queue_free()
 	else:
-		Signals.emit_signal("spellOver",self)
+		emit_signal("spellOver",self)

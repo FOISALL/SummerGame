@@ -1,6 +1,6 @@
 extends Node2D
-
 class_name Spell # this is meant to act as an abstract class
+signal spellOver(spell: Spell)
 
 var spellCastingComp : SpellcastingComponent
 var id: String
@@ -28,7 +28,7 @@ func cast():
 	pass
 	
 # spell constructor
-static func new_Spell(id: String,source: Node2D, caster: Node2D, lvl : int):
+static func new_Spell(id: String,source: Node2D, caster: Node2D, lvl : int) -> Spell:
 	var spellName = id
 	var spellPath = load("res://Spells/" +spellName + "/" + spellName +".tscn")
 	var spell = spellPath.instantiate()
