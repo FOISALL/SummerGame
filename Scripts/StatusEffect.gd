@@ -11,6 +11,8 @@ var target : Node2D
 var MAX_LVL : int
 var lvl : int
 
+signal effectOver(effect: StatusEffect)
+
 static func new_effect(id: String,source: Node2D, target: Node2D, lvl : int):
 	var status_name = id
 	var effectPath = load("res://Effects/" + status_name + "/" + status_name +".tscn")
@@ -31,5 +33,15 @@ func clone():
 func refresh(effect : StatusEffect):
 	source = effect.source
 
+# methods to be overridden by children
 func activate():
+	pass
+	
+func setHealthComp(healthComp: HealthComponent):
+	pass
+	
+func setManaComp(manaComp: ManaComponent):
+	pass
+
+func setMovementComp(moveComp: MovementComponent):
 	pass

@@ -5,10 +5,14 @@ class_name StatusEffectComponent
 var immunity: Array[StatusEffect] = []
 var activeEffects: Array[StatusEffect] = []
 
+@export var healthComp : HealthComponent
+@export var manaComp : ManaComponent
+@export var movementComp : MovementComponent
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func applyEffect(effect : StatusEffect):
 	var effectCopy : StatusEffect
@@ -22,6 +26,13 @@ func applyEffect(effect : StatusEffect):
 			add_child(effectCopy)
 			
 			activeEffects.append(effectCopy)
+			
+			effectCopy.setHealthComp(healthComp)
+			effectCopy.setManaComp(manaComp)
+			effectCopy.setMovementComp(movementComp)
+			
+			effectCopy.connect("effectOver",_on_effectOver)
+			
 			effectCopy.activate()
 	else:
 		print("Immune")
@@ -32,6 +43,7 @@ func refresh(effect: StatusEffect):
 	activeEffects[index].refresh(effect)
 
 func _on_effectOver(effect: StatusEffect):
+	print("catching effect over signal")
 	endEffect(effect)
 
 

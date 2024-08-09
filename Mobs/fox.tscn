@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dqr25kic37nem"]
+[gd_scene load_steps=16 format=3 uid="uid://dqr25kic37nem"]
 
 [ext_resource type="Script" path="res://Fox.gd" id="1_4qn6q"]
 [ext_resource type="Texture2D" uid="uid://06ycq5stviju" path="res://assets/entities/fox creature.png" id="2_pugji"]
 [ext_resource type="PackedScene" uid="uid://bm6hakmsclc8g" path="res://Components/health_component.tscn" id="3_xnrgv"]
 [ext_resource type="PackedScene" uid="uid://uebeuinscr40" path="res://Components/hurtbox_component.tscn" id="4_fiusm"]
+[ext_resource type="PackedScene" uid="uid://c1qtktsrtoto" path="res://Components/status_effect_component.tscn" id="5_ekttw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ecqa"]
 radius = 7.0
@@ -82,8 +83,9 @@ autoplay = "Idle"
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_xnrgv")]
 
-[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComp") instance=ExtResource("4_fiusm")]
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("healthComp", "effectComp") instance=ExtResource("4_fiusm")]
 healthComp = NodePath("../HealthComponent")
+effectComp = NodePath("../StatusEffectComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 light_mask = 2
@@ -101,6 +103,9 @@ show_percentage = false
 [node name="HealthbarVisibleTimer" type="Timer" parent="HealthBar"]
 wait_time = 2.0
 one_shot = true
+
+[node name="StatusEffectComponent" parent="." node_paths=PackedStringArray("healthComp") instance=ExtResource("5_ekttw")]
+healthComp = NodePath("../HealthComponent")
 
 [connection signal="healthChanged" from="HealthComponent" to="." method="_on_health_component_health_changed"]
 [connection signal="timeout" from="HealthBar/HealthbarVisibleTimer" to="." method="_on_healthbar_visible_timer_timeout"]
