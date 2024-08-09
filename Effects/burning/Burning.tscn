@@ -7,6 +7,7 @@ script = ExtResource("1_phuli")
 
 [node name="DmgTimer" type="Timer" parent="."]
 
-[node name="LifeTimer" type="Timer" parent="."]
+[node name="lifeTimer" type="Timer" parent="."]
 
 [connection signal="timeout" from="DmgTimer" to="." method="_on_dmg_timer_timeout"]
+[connection signal="timeout" from="lifeTimer" to="." method="_on_life_timer_timeout"]

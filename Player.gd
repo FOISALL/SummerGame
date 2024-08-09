@@ -129,9 +129,6 @@ func _on_health_component_health_changed(prevHealth, newHealth):
 	Signals.emit_signal("playerHealthChanged", newHealth)
 	
 
-	
-
-
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "meleeAttack":
 		isAttacking = false
@@ -139,7 +136,6 @@ func _on_animation_player_animation_finished(anim_name):
 
 
 func _on_melee_attack_area_entered(area):
-	print("ATTACK!!")
 	if area is HurtboxComponent:
 		var hurtbox : HurtboxComponent = area
 		

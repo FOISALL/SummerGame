@@ -8,6 +8,8 @@ var dmg : Array[float] = [2,5,11.5,18,25]
 
 @export var anim: AnimationPlayer
 
+var burn : StatusEffect
+
 # Called when class is created
 func _init():
 	id = "flameBlast"
@@ -17,7 +19,7 @@ func _init():
 # Called when the node enters the scene tree for the first time.
 func _ready(): # I will have to evaluate how to initialise it correctly from init if needed
 	anim = $AnimatedSprite2D/AnimationPlayer
-
+	burn = StatusEffect.new_effect("burning",self,self, 1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,6 +46,7 @@ func _on_area_entered(area):
 		var attack  = Attack.new()
 		attack.attackDamage = dmg[lvl]
 		attack.attackPos = global_position
+		attack.effect = burn
 		
 		hurtbox.damage(attack)
 		

@@ -292,10 +292,9 @@ height = 42.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_881da"]
 radius = 12.0
 
-[node name="fireBall" type="Area2D" node_paths=PackedStringArray("anim")]
+[node name="fireBall" type="Area2D"]
 collision_mask = 18
 script = ExtResource("1_x856t")
-anim = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l2fku")
