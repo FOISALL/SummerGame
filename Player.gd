@@ -66,20 +66,12 @@ func _ready():
 	spells.preparedSpells.append(flameBlast)
 	
 
-	
-
-	
-
-	
 
 
 func _physics_process(delta):
 	
 	if(!isAttacking):
 		anim.play("Idle")
-	
-	
-
 
 	# MOVEMENT
 
@@ -109,7 +101,7 @@ func getMana():
 # this will prob be moved elsewhere later
 func _input(event):
 	if event.is_action_pressed("attack"):
-		anim.play("meleeAttack")
+		anim.play("meleeAttack")	
 		isAttacking = true
 		anim.speed_scale = 3
 		
