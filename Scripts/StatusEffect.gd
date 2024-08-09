@@ -1,6 +1,8 @@
 extends Node2D
 class_name StatusEffect
 
+signal effectOver(effect: StatusEffect)
+
 enum EffectType {BUFF,DEBUFF}
 
 var id : String
@@ -11,8 +13,7 @@ var target : Node2D
 var MAX_LVL : int
 var lvl : int
 
-signal effectOver(effect: StatusEffect)
-
+# Effect Constructure
 static func new_effect(id: String,source: Node2D, target: Node2D, lvl : int):
 	var status_name = id
 	var effectPath = load("res://Effects/" + status_name + "/" + status_name +".tscn")
@@ -30,6 +31,8 @@ func clone():
 	clone.lvl = self.lvl
 	return clone
 	
+# Refresh effect, will be overridden with a timer reset in subclasses,
+# right now, refreshing by another effect will give an effect the owner of the most recent caster
 func refresh(effect : StatusEffect):
 	source = effect.source
 

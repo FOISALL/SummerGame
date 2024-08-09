@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-
-
 const JUMP_VELOCITY = -400.0
 
 # Base Stats, may be moved into individual classes later
