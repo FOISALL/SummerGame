@@ -34,7 +34,7 @@ func restore(amount: float):
 	_setHealth(min(MAX_HEALTH, health + amount))
 	
 # main method for changing mana, not meant to be called from outside, emits signal for parent
-func _setHealth(newHealth):
+func _setHealth(newHealth: float):
 	var prevHealth = health
 
 	if isFull() && newHealth < prevHealth:

@@ -15,6 +15,8 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	# Life timer represents the lifetime of the effect, or the duration in other terms
 	lifeTimer = $lifeTimer
 	lifeTimer.wait_time = duration[lvl]
 	lifeTimer.one_shot = true

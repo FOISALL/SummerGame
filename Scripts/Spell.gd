@@ -11,7 +11,7 @@ var lvl: int
 var maxLvl: int 
 
 var source: Node2D # will be changed to an enum later when classes are implemented
-var caster: Node2D
+var caster: Node2D # may be a player, npc, or other spell
 var school: String 
 var type: String
 
@@ -37,7 +37,7 @@ static func new_Spell(id: String,source: Node2D, caster: Node2D, lvl : int) -> S
 	spell.lvl = lvl
 	return spell
 
-func clone():
+func clone() -> Spell:
 	var clone : Spell = self.duplicate()
 	clone.id = self.id
 	clone.source = self.source
